@@ -1,2 +1,2 @@
-from .CMRL_new import CMRL_ModelTrainer, CMRL
-from .CMRL_new_reg import CMRL_ModelTrainer_reg, CMRL_reg
+from .CausalDDS_new import CausalDDS_ModelTrainer, CausalDDS
+from .CausalDDS_new_reg import CausalDDS_ModelTrainer_reg, CausalDDS_reg

@@ -44,19 +44,19 @@ def experiment():
     }
     for args.lam1 in [1]:
         args.lam2 = 1
-        for args.lr in [1e-4,1e-5,1e-3]:
-            for args.weight_decay in [0,1e-5,1e-4,1e-3]:
-                for args.dropout in [0,0.1,0.2,0.3,0.4,0.5,0.6]:
+        for args.lr in [1e-4]:
+            for args.weight_decay in [1e-4]:
+                for args.dropout in [0.5]:
                     best_aucs, best_auprs, best_accs, best_kappas, best_baccs, best_f1s = [], [], [], [], [], []
                     for repeat in range(1, args.repeat + 1):
-                        for fold in range(1, 6):
+                        for fold in range(1, 5):
 
                             train_set = torch.load("DDS/ddsdata/"+str(args.dataset)+"/processed/classification10/"+args.setting+"/train_"+str(fold)+".pt")
                             test_set = torch.load("DDS/ddsdata/"+str(args.dataset)+"/processed/classification10/"+args.setting+"/test_"+str(fold)+".pt")
             
                             print("Dataset Loaded! ({:.4f} sec)".format(time.time() - start))
                             stats, config_str, _,  = main(args, train_set, test_set, gene_exp_dict, repeat = repeat, fold = fold)
-
+        
                             # get Stats
                             best_aucs.append(stats[0])
                             best_auprs.append(stats[1])
@@ -82,9 +82,9 @@ def experiment():
 
 def main(args, train_df, test_df, gene_exp_dict, repeat = 0, fold = 0):
 
-    if args.embedder == 'CMRL':
-        from models import CMRL_ModelTrainer
-        embedder = CMRL_ModelTrainer(args, train_df, test_df, gene_exp_dict, repeat, fold)
+    if args.embedder == 'CausalDDS':
+        from models import CausalDDS_ModelTrainer
+        embedder = CausalDDS_ModelTrainer(args, train_df, test_df, gene_exp_dict, repeat, fold)
 
     best_auc, best_aupr, best_acc, best_kappa, best_bacc, best_f1 = embedder.train()
 

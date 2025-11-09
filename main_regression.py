@@ -44,9 +44,9 @@ def experiment():
     }
     for args.lam1 in [1]:
         args.lam2 = 1
-        for args.lr in [1e-3,1e-4,1e-5]:
-            for args.weight_decay in [0.1e-5,1e-4,1e-3]:
-                for args.dropout in [0,0.1,0.2,0.3,0.4,0.5,0.6]: 
+        for args.lr in [1e-3,1e-4]:
+            for args.weight_decay in [1e-5]:
+                for args.dropout in [0,0.1,0.2,0.3,0.4,0.5]: 
                     best_mses, best_rmses, best_r2s, best_pears, best_maes, best_spears = [], [], [], [], [], []
                     for repeat in range(1, args.repeat + 1):
                         for fold in range(1, 6):
@@ -65,7 +65,7 @@ def experiment():
                             best_maes.append(stats[4])
                             best_spears.append(stats[5])
 
-                            #write_summary_reg(args, config_str, stats)
+                            write_summary_reg(args, config_str, stats)
 
                             print(fold)
     

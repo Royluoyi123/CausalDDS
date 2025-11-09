@@ -31,7 +31,7 @@ def write_summary(args, config_str, stats):
 
 def write_summary_reg(args, config_str, stats):
     
-    f = open("DDS/try/{}/regression/{}/lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_f1.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
+    f = open("DDS/results/{}/regression/newCMRL/{}_lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_f1.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
     f.write("--------------------------------------------------------------------------------- \n")
     f.write(config_str)
     f.write("\n")
@@ -43,7 +43,7 @@ def write_summary_reg(args, config_str, stats):
 
 def write_summary_total(args, config_str, stats):
     
-    f = open("DDS/results/{}/10/{}/lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_total.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
+    f = open("DDS/try/{}/10/{}/lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_total_128.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
     f.write("--------------------------------------------------------------------------------- \n")
     f.write(config_str)
     f.write("\n")
@@ -55,7 +55,7 @@ def write_summary_total(args, config_str, stats):
 
 def write_summary_total_reg(args, config_str, stats):
     
-    f = open("DDS/results/{}/regression/{}/lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_total_f1.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
+    f = open("DDS/results/{}/regression/newCMRL/{}_lam1_{}_lam2_{}_lr_{}_wd_{}_drop_{}_total_f1.txt".format(args.dataset,args.setting,args.lam1,args.lam2,args.lr,args.weight_decay, args.dropout), "a")
     f.write("--------------------------------------------------------------------------------- \n")
     f.write(config_str)
     f.write("\n")

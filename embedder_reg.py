@@ -52,7 +52,7 @@ class embedder:
         
         self.train_loader = DataLoader(self.train_dataset, batch_size = args.batch_size, shuffle=True)
         self.test_loader = DataLoader(self.test_dataset, batch_size = args.batch_size)
-        self.explain_loader = DataLoader(self.test_dataset, batch_size = 1)
+        self.explain_loader = DataLoader(self.test_dataset, batch_size = 32)
 
         self.is_early_stop = False
 
@@ -159,7 +159,7 @@ class embedder:
             if self.args.save_checkpoints == True:
                 
                 #checkpoint = {'mol_id': np.hstack(mol_indexs), 'output': np.hstack(outputs)}                
-                check_dir =  'DDS/warm_start_bestepoch_ONEIL-COSMIC640_reg.pth'
+                check_dir =  'warm_start_bestepoch.pth'
                 torch.save(self.model.state_dict(), check_dir)
         
         else:
