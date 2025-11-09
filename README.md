@@ -6,9 +6,16 @@ Disentangling Causal Substructures for Interpretable and Generalizable Drug Syne
 
 
 ## How to run the code
+### Create a directory under the ddsdata directory, example:
+DDS/ddsdata/DrugCombDB640/raw/classification10/warm_start/
+DDS/ddsdata/DrugCombDB640/processed/classification10/warm_start/
+DDS/ddsdata/ONEIL-COSMIC640/raw/regression/drug_pairs/
+DDS/ddsdata/ONEIL-COSMIC640/processed/regression/drug_pairs/
 ### split the raw data
 ```
-python DDS/ddsdata/process_data.py 
+python DDS/ddsdata/process_data.py
+python DDS/scaffold_split.py
+python DDS/simpd_split.py
 ```
 ### create the .pt file 
 ```
