@@ -55,8 +55,7 @@ class CausalDDS_ModelTrainer_reg(embedder):
 
                 #samples[0] 药物1, samples[1] 药物2, samples[2] 细胞系, samples[3] label
 
-                #pred = self.model([samples[0].to(self.device), samples[1].to(self.device), masks[0].to(self.device), masks[1].to(self.device), samples[2].to(self.device)])
-                #loss = loss_function_MSE(pred, samples[3].reshape(-1, 1).to(self.device).float()).mean() # Supervised Loss 没有任何对图操作的
+                
 
                 if self.args.symmetric:
                     if epoch % 2 == 0:
@@ -77,9 +76,7 @@ class CausalDDS_ModelTrainer_reg(embedder):
 
                 
                 loss = loss_pos + self.args.lam1 * loss_neg
-                #loss = loss +  self.args.lam1 * loss_neg
-
-                #print(loss,loss_pos,self.args.lam1 * loss_neg)
+                
                 
                 # Intervention Loss
                 if self.args.intervention:
