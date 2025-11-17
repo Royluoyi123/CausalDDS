@@ -55,8 +55,7 @@ class CausalDDS_ModelTrainer(embedder):
 
                 #samples[0] 药物1, samples[1] 药物2, samples[2] 细胞系, samples[3] label
 
-                pred = self.model([samples[0].to(self.device), samples[1].to(self.device), masks[0].to(self.device), masks[1].to(self.device), samples[2].to(self.device)])
-                loss = loss_function_BCE(pred, samples[3].reshape(-1, 1).to(self.device).float()).mean() # Supervised Loss 没有任何对图操作的
+                
 
                 if self.args.symmetric:
                     if epoch % 2 == 0:
@@ -73,9 +72,8 @@ class CausalDDS_ModelTrainer(embedder):
                 random_label = torch.ones_like(neg, dtype=torch.float).to(self.device) / self.num_classes
                 loss_neg = F.kl_div(neg, random_label, reduction = 'batchmean')
                 
-                loss = loss + loss_pos + self.args.lam1 * loss_neg
-                #loss = loss +  self.args.lam1 * loss_neg
-                #loss = loss +  loss_pos
+                loss = loss_pos + self.args.lam1 * loss_neg
+                
 
                 #print(loss,loss_pos,self.args.lam1 * loss_neg)
                 
@@ -101,20 +99,7 @@ class CausalDDS_ModelTrainer(embedder):
 
             self.scheduler.step(self.train_auc_score)
             
-            # Write Statistics
-            #self.writer.add_scalar("loss/positive", self.loss_pos/bc, epoch)
-            #self.writer.add_scalar("loss/negative", self.loss_neg/bc, epoch)
-            #if self.args.intervention:
-                #self.writer.add_scalar("loss/intervention", self.loss_inv/bc, epoch)
-            #self.writer.add_scalar("stats/importance drug A", self.importance_A/bc, epoch)
-            #self.writer.add_scalar("stats/importance drug B", self.importance_A/bc, epoch)
-
-            #print("loss/positive", self.loss_pos/bc, epoch)
-            #print("loss/negative", self.loss_neg/bc, epoch)
-            #if self.args.intervention:
-                #print("loss/intervention", self.loss_inv/bc, epoch)
-            #print("stats/importance drug A", self.importance_A/bc, epoch)
-            #print("stats/importance drug B", self.importance_B/bc, epoch)
+           
             print(self.patience)
             
 
